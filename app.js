@@ -1,15 +1,53 @@
-var express = require('express');
-var app = express();
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('TwitterClone.db');
-var dbInsertUser = require('./db.js').insertUser;
-var dbInsertTweet = require('./db.js').insertTweet;
+var express = require('express')
+, app = express()
+, sqlite3 = require('sqlite3').verbose()
+, db = new sqlite3.Database('TwitterClone.db')
+, dbInsertUser = require('./db.js').insertUser
+, dbInsertTweet = require('./db.js').insertTweet
+, fs = require('fs')
+, html = fs.readFileSync('./index.html')
+, dbGetPassword = require('./db.js').getPassword
+, bodyParser = require('body-parser');
+
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.post('/mainApp', function (req, res){
+    var login = {
+        userid: req.body.userid,
+        password: req.body.password
+    };
+   console.log(login.password);
+    var p = dbGetPassword(db, login);
+       p.then(
+        (val) => {
+            console.log(val);
+            console.log(login.password);
+           if (login.password === val){
+               res.send('Login Succesful');
+           }
+           else{
+               res.send('Username or password issue!');
+           }
+    }
+    ).catch(
+        (err) => {
+            res.send(err);
+    }
+    )
+});
 
 
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  res.writeHead(200, {'Content-Type': 'text/html'});
+   res.end(html);
 });
+
+app.get('/mainApp', function (req, res){
+    res.send('logged in');
+})
 
 app.get('/adduser', function (req, res){
     
