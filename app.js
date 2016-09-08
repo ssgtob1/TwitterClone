@@ -4,6 +4,7 @@ var express = require('express')
 , db = new sqlite3.Database('TwitterClone.db')
 , dbInsertUser = require('./db.js').insertUser
 , dbInsertTweet = require('./db.js').insertTweet
+, dbGetTweets = require('./db.js').getTweets
 , fs = require('fs')
 , html = fs.readFileSync('./index.html')
 , dbGetPassword = require('./db.js').getPassword
@@ -37,8 +38,6 @@ app.post('/mainApp', function (req, res){
     }
     )
 });
-
-
 
 app.get('/', function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -82,6 +81,23 @@ app.get('/addtweet', function (req, res) {
  p.then(
      (val) => {
          res.send('Tweet Added');
+     }
+ ).catch(
+     (err) => {
+         res.send(err);
+     }
+ )
+});
+
+app.get('/gettweets', function (req, res) {
+ var user = {
+     userid: req.query.userid, 
+ };
+
+ var p = dbGetTweets(db, user);
+ p.then(
+     (val) => {
+         res.send(val);
      }
  ).catch(
      (err) => {
