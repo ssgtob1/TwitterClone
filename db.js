@@ -4,6 +4,7 @@ var db = new sqlite3.Database('TwitterClone.db');
 
 exports.insertUser = insertUser;
 exports.insertTweet = insertTweet;
+exports.getTweets = getTweets;
 
 
 function insertUser(db, user) {
@@ -54,7 +55,7 @@ function insertTweet(db, tweet) {
     function getPassword(db, user) {
         return new Promise(
             db.serialize(function() {
-                (reslove, reject) => {
+                (resolve, reject) => {
                     db.each("SELECT password FROM user WHERE userid = " + user.userid, function(err, row) {
                         if (err) {
                           
@@ -66,4 +67,20 @@ function insertTweet(db, tweet) {
                 }
             })
         )
+    }
+
+    function getTweets(db, user) {
+    return new Promise(
+        (resolve, reject) => {
+            db.serialize(function() {
+                     db.all("SELECT tweetcontent, tweetts FROM tweets WHERE userid = ? ", user.userid, function(err, rows) {
+                        if (err) {
+                            reject(err);
+                            return;
+                        }
+                        resolve(rows);
+                    });
+                })
+            })
+
     }

@@ -4,6 +4,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('TwitterClone.db');
 var dbInsertUser = require('./db.js').insertUser;
 var dbInsertTweet = require('./db.js').insertTweet;
+var dbGetTweets = require('./db.js').getTweets;
 
 
 
@@ -44,6 +45,23 @@ app.get('/addtweet', function (req, res) {
  p.then(
      (val) => {
          res.send('Tweet Added');
+     }
+ ).catch(
+     (err) => {
+         res.send(err);
+     }
+ )
+});
+
+app.get('/gettweets', function (req, res) {
+ var user = {
+     userid: req.query.userid, 
+ };
+
+ var p = dbGetTweets(db, user);
+ p.then(
+     (val) => {
+         res.send(val);
      }
  ).catch(
      (err) => {
