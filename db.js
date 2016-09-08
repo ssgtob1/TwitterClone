@@ -2,6 +2,8 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('TwitterClone.db');
 
 
+exports.insertUser = insertUser;
+exports.insertTweet = insertTweet;
 
 
 function insertUser(db, user) {
@@ -9,42 +11,42 @@ function insertUser(db, user) {
         (resolve, reject) => {
             db.serialize(function() {
                     var stmt = db.prepare("INSERT INTO user  VALUES(?,?,?,?,?)");
-                    stmt.run(user.userid, user.password, user.firstname, user.lastname, user.email),
+                    stmt.run(user.userid, user.password, user.firstname, user.lastname, user.email,
                         function(err) {
                             if (err) {
                                 stmt.finalize();
-                                db.close();
+                            
                                 reject(err);
                                 return;
                             }
                             stmt.finalize();
-                            db.close();
+                            
                             resolve();
-                        })
-            };
+                        });
+            });
         })
 
 
 
 }
 
-function inserTweet(db, tweet) {
+function insertTweet(db, tweet) {
     return new Promise(
         (resolve, reject) => {
             db.serialize(function() {
-                    var stmt = db.prepare("INSERT INTO tweets  VALUES(?,?,?)");
-                    stmt.run(tweet.userid, tweet.tweetcontent, tweet.tweettsfunction(err) {
+                    var stmt = db.prepare("INSERT INTO tweets  VALUES(?,?,?,?)");
+                    stmt.run(null, tweet.userid, tweet.tweetcontent, tweet.tweetts, function(err) {
                         if (err) {
                             stmt.finalize();
-                            db.close();
+                          
                             reject(err);
                             return;
                         }
                         stmt.finalize();
-                        db.close();
+                      
                         resolve();
-                    })
-                };
+                    });
+                })
             })
 
     }
@@ -55,13 +57,13 @@ function inserTweet(db, tweet) {
                 (reslove, reject) => {
                     db.each("SELECT password FROM user WHERE userid = " + user.userid, function(err, row) {
                         if (err) {
-                            db.close();
+                          
                             reject(err);
                             return;
                         }
                         resolve(row.password);
                     });
                 }
-            });
+            })
         )
     }
