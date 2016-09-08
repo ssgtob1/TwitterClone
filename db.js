@@ -72,8 +72,9 @@ function getPassword(db, user) {
                                         });
                                     })
                                 }
-                            )
+                        })
                         }
+            }))}
 
                         function getTweets(db, user) {
                             return new Promise(
