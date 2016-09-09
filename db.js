@@ -11,10 +11,10 @@ exports.getPassword = getPassword;
 function insertUser(user) {
     return new Promise(
         (resolve, reject) => {
-            db.serialize(function() {
+            db.serialize(function () {
                 var stmt = db.prepare("INSERT INTO user  VALUES(?,?,?,?,?)");
                 stmt.run(user.userid, user.password, user.firstname, user.lastname, user.email,
-                    function(err) {
+                    function (err) {
                         if (err) {
                             stmt.finalize();
 
@@ -35,9 +35,9 @@ function insertUser(user) {
 function insertTweet(tweet) {
     return new Promise(
         (resolve, reject) => {
-            db.serialize(function() {
+            db.serialize(function () {
                 var stmt = db.prepare("INSERT INTO tweets  VALUES(?,?,?,?)");
-                stmt.run(null, tweet.userid, tweet.tweetcontent, tweet.tweetts, function(err) {
+                stmt.run(null, tweet.userid, tweet.tweetcontent, tweet.tweetts, function (err) {
                     if (err) {
                         stmt.finalize();
 
@@ -55,37 +55,39 @@ function insertTweet(tweet) {
 
 function getPassword(user) {
     return new Promise(
-         (resolve, reject) => {
-            db.serialize(function() {
-                   
-                        db.each("SELECT password FROM user WHERE userid = ? ", user.userid, function(err, row) {
+        (resolve, reject) => {
+            db.serialize(function () {
 
-                            
-                                            if (err) {
+                db.all("SELECT password FROM user WHERE userid = ? ", user.userid, function (err, rows) {
+                    if (err) {
 
-                                                reject(err);
-                                                return;
-                                            }
-                                            console.log(row.password);
-                                            resolve(row.password);
-                                        });
-                                    
-                                }
-            )})
-        
+                        reject(err);
+                        return;
+                    }
+                    if (rows.length > 0) {
+                        resolve(rows[0].password);
+                    } else {
+                        reject('no user with that userid');
+                    }
+                });
+
+            }
+            )
+        })
+
 }
-                        function getTweets(user) {
-                            return new Promise(
-                                (resolve, reject) => {
-                                    db.serialize(function() {
-                                        db.all("SELECT tweetcontent, tweetts FROM tweets WHERE userid = ? ", user.userid, function(err, rows) {
-                                            if (err) {
-                                                reject(err);
-                                                return;
-                                            }
-                                            resolve(rows);
-                                        });
-                                    })
-                                })
+function getTweets(user) {
+    return new Promise(
+        (resolve, reject) => {
+            db.serialize(function () {
+                db.all("SELECT tweetcontent, tweetts FROM tweets WHERE userid = ? ", user.userid, function (err, rows) {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(rows);
+                });
+            })
+        })
 
-                        }
+}
