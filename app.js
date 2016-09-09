@@ -27,7 +27,7 @@ app.post('/mainApp', function(req, res) {
         (val) => {
             console.log(val);
             console.log(login.password);
-            if (login.password === val) {
+            if (login.password == val) {
                 res.send('Login Succesful');
             } else {
                 res.send('Username or password issue!');
@@ -35,6 +35,7 @@ app.post('/mainApp', function(req, res) {
         }
     ).catch(
         (err) => {
+            console.log(err);
             res.send(err);
         }
     )

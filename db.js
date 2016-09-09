@@ -55,13 +55,12 @@ function insertTweet(db, tweet) {
 
 function getPassword(db, user) {
     return new Promise(
+         (resolve, reject) => {
             db.serialize(function() {
-                    (resolve, reject) => {
-                        db.each("SELECT password FROM user WHERE userid = " + user.userid, function(err, row) {
+                   
+                        db.each("SELECT password FROM user WHERE userid = ? ", user.userid, function(err, row) {
 
-                                (resolve, reject) => {
-                                    db.serialize(function() {
-                                        db.each("SELECT password FROM user WHERE userid = ? ", user.userid, function(err, row) {
+                            
                                             if (err) {
 
                                                 reject(err);
@@ -70,12 +69,11 @@ function getPassword(db, user) {
                                             console.log(row.password);
                                             resolve(row.password);
                                         });
-                                    })
+                                    
                                 }
-                        })
-                        }
-            }))}
-
+            )})
+        
+}
                         function getTweets(db, user) {
                             return new Promise(
                                 (resolve, reject) => {
