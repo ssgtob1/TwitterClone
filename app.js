@@ -1,7 +1,6 @@
 var express = require('express'),
     app = express(),
-    sqlite3 = require('sqlite3').verbose(),
-    db = new sqlite3.Database('TwitterClone.db'),
+
     dbInsertUser = require('./db.js').insertUser,
     dbInsertTweet = require('./db.js').insertTweet,
     dbGetTweets = require('./db.js').getTweets,
@@ -22,7 +21,7 @@ app.post('/mainApp', function(req, res) {
         password: req.body.password
     };
     console.log(login.password);
-    var p = dbGetPassword(db, login);
+    var p = dbGetPassword(login);
     p.then(
         (val) => {
             console.log(val);
@@ -62,7 +61,7 @@ app.get('/adduser', function(req, res) {
         email: req.query.email
 
     };
-    var p = dbInsertUser(db, user);
+    var p = dbInsertUser(user);
     p.then(
         (val) => {
             res.send('User Added');
@@ -81,7 +80,7 @@ app.get('/addtweet', function(req, res) {
         tweetts: new Date()
     };
 
-    var p = dbInsertTweet(db, tweet);
+    var p = dbInsertTweet(tweet);
     p.then(
         (val) => {
             res.send('Tweet Added');
@@ -98,7 +97,7 @@ app.get('/gettweets', function(req, res) {
         userid: req.query.userid,
     };
 
-    var p = dbGetTweets(db, user);
+    var p = dbGetTweets(user);
     p.then(
         (val) => {
             res.send(val);

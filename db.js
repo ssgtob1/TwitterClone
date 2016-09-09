@@ -8,7 +8,7 @@ exports.getTweets = getTweets;
 exports.getPassword = getPassword;
 
 
-function insertUser(db, user) {
+function insertUser(user) {
     return new Promise(
         (resolve, reject) => {
             db.serialize(function() {
@@ -32,7 +32,7 @@ function insertUser(db, user) {
 
 }
 
-function insertTweet(db, tweet) {
+function insertTweet(tweet) {
     return new Promise(
         (resolve, reject) => {
             db.serialize(function() {
@@ -53,7 +53,7 @@ function insertTweet(db, tweet) {
 
 }
 
-function getPassword(db, user) {
+function getPassword(user) {
     return new Promise(
          (resolve, reject) => {
             db.serialize(function() {
@@ -74,7 +74,7 @@ function getPassword(db, user) {
             )})
         
 }
-                        function getTweets(db, user) {
+                        function getTweets(user) {
                             return new Promise(
                                 (resolve, reject) => {
                                     db.serialize(function() {
