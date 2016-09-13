@@ -21,7 +21,11 @@ function login() {
 }
 
 function writeUserFeed (feedArr){
-    var out = "";
+    var out = "<div class=\"row-fluid\">";
+    out += "<div class=\"span4 offset4\">";
+    out += "<textarea rows=\"3\">New Tweet</textarea>" ;
+    out += "</div>";
+    out += "</div>";
     var i;
     
     for(i = 0; i < feedArr.length; i++){
