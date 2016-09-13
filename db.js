@@ -62,6 +62,7 @@ function getPassword(userid){
 }
 
 
+
 // chronological
 function allUserTweets(userId) {
     return new Promise(function (resolve, reject) {
@@ -75,6 +76,7 @@ function allUserTweets(userId) {
         });
     });  
 }
+
 
 exports.getUser = getUser;
 function getUser(userId) {
@@ -148,6 +150,7 @@ function likeTweet(tweetId, likerUserId) {
     });
 }
 
+
 // function unlikeTweet() {
 
 // }
@@ -194,3 +197,5 @@ function allFollowingTweets(userId) {
         }
     );
 }
+
+
