@@ -21,11 +21,25 @@ function login() {
 }
 
 function writeUserFeed (feedArr){
-    var out = "<div class=\"row-fluid\">";
-    out += "<div class=\"span4 offset4\">";
-    out += "<textarea rows=\"3\">New Tweet</textarea>" ;
-    out += "</div>";
-    out += "</div>";
+var out="";
+out += "<a href=\"#myModal\" role=\"button\" class=\"btn\" data-toggle=\"modal\">Launch demo modal<\/a>";
+out += " ";
+out += "<!-- Modal -->";
+out += "<div id=\"myModal\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">";
+out += "  <div class=\"modal-header\">";
+out += "    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×<\/button>";
+out += "    <h3 id=\"myModalLabel\">Modal header<\/h3>";
+out += "  <\/div>";
+out += "  <div class=\"modal-body\">";
+out += "    <p>One fine body…<\/p>";
+out += "  <\/div>";
+out += "  <div class=\"modal-footer\">";
+out += "    <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close<\/button>";
+out += "    <button class=\"btn btn-primary\">Save changes<\/button>";
+out += "<\/div>";
+out += "  <\/div>";
+out += "";
+
     var i;
     
     for(i = 0; i < feedArr.length; i++){
