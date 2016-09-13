@@ -55,7 +55,7 @@ function getPassword(userid){
                 reject(err);
                 return;
             }
-            console.log(rows);
+           
             resolve(rows[0].Password);
         });
     });
@@ -66,7 +66,7 @@ function getPassword(userid){
 // chronological
 function allUserTweets(userId) {
     return new Promise(function (resolve, reject) {
-        var query = `SELECT Id, Content, Reply, Date FROM tweet WHERE Author = ?`;
+        var query = `SELECT Id, Content, Reply, Date, Author FROM tweet WHERE Author = ?`;
         db.all(query, userId, function (err, rows) {
             if (err) {
                 reject(err);

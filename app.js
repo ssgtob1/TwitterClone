@@ -3,7 +3,8 @@ var express = require('express'),
     fs = require('fs'),
     html = fs.readFileSync('./index.html'),
     bodyParser = require('body-parser'),
-    db = require('./db');
+    db = require('./db'),
+    path = require('path');
 
 
 app.use(bodyParser.json());
@@ -29,10 +30,15 @@ app.post('/login', function(req, res) {
         (val) => {
             
             if (login.password == val) {
-                res.send('Login Succesful');
+                return db.allFollowingTweets(login.userid);
+             
             } else {
-                res.send('Username or password issue!');
+                throw 'Username or password issue!';
             }
+        }
+    ).then(
+        (val) => {
+            res.send(val);
         }
     ).catch(
         (err) => {
