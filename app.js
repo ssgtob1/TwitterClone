@@ -1,31 +1,33 @@
 var express = require('express'),
     app = express(),
-
-    dbInsertUser = require('./db.js').insertUser,
-    dbInsertTweet = require('./db.js').insertTweet,
-    dbGetTweets = require('./db.js').getTweets,
     fs = require('fs'),
     html = fs.readFileSync('./index.html'),
-    dbGetPassword = require('./db.js').getPassword,
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    db = require('./db');
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
+
+    
 }));
 
-app.post('/mainApp', function(req, res) {
+
+app.use(express.static('public'));
+
+
+app.post('/login', function(req, res) {
     var login = {
         userid: req.body.userid,
         password: req.body.password
     };
-    console.log(login.password);
-    var p = dbGetPassword(login);
+    console.log(login.userid);
+    
+    var p = db.getPassword(login.userid);
     p.then(
         (val) => {
-            console.log(val);
-            console.log(login.password);
+            
             if (login.password == val) {
                 res.send('Login Succesful');
             } else {

@@ -98,6 +98,7 @@ input:focus::-webkit-input-placeholder {
 			font-size:18px;
 			font-weight:normal;
 			text-transform: capitalize;
+      color: white;
 		}
 
 		#textbox {
@@ -110,9 +111,9 @@ input:focus::-webkit-input-placeholder {
 <body>
 	<h1>Login to TwitterClone</h1>
 
-	<form action="/mainApp" method="post">
+	<form action="/login" method="POST">
   <h2><span class="entypo-login"></span> Login</h2>
-  <button class="submit"><span class="entypo-lock"></span></button>
+  <button class="submit" ><span class="entypo-lock"></span></button>
   <span class="entypo-user inputUserIcon"></span>
   <input type="text" class="user" placeholder="username" name="userid" id="userid"/>
   <span class="entypo-key inputPassIcon"></span>
@@ -132,5 +133,7 @@ input:focus::-webkit-input-placeholder {
         $(".inputPassIcon").css("color", "white");
         });
     </script>
+
+
 </body>
 </html>
