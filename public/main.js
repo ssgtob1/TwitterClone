@@ -1,12 +1,12 @@
 
 var userid = document.getElementById('userid');
 var password = document.getElementById('password');
-
+var userIdLoggedIn;
 
 
 function login() {
     var params = JSON.stringify({ userid: userid.value, password: password.value });
-    
+    userIdLoggedIn = userid.value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
