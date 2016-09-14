@@ -22,6 +22,7 @@ function login() {
 
 function writeUserFeed (feedArr){
     var out="";
+out += "<img src=\"/twitterZ-icon.png\" width=\"50\">"
 out += "<div class=\"container\">";
 out += "<!-- Trigger the modal with a button -->";
 out += "<button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Add Tweet<\/button>";
