@@ -136,6 +136,7 @@ function createTweet(userId, text) {
     });
 }
 
+exports.likeTweet = likeTweet;
 function likeTweet(tweetId, likerUserId) {
     return new Promise(function (resolve, reject) {
         var stmt = db.prepare(`INSERT INTO likeRel (Tweet, User) VALUES (?, ?)`);
