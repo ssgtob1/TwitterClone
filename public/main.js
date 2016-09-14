@@ -21,24 +21,32 @@ function login() {
 }
 
 function writeUserFeed (feedArr){
-var out="";
-out += "<a href=\"#myModal\" role=\"button\" class=\"btn\" data-toggle=\"modal\">Launch demo modal<\/a>";
-out += " ";
-out += "<!-- Modal -->";
-out += "<div id=\"myModal\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">";
-out += "  <div class=\"modal-header\">";
-out += "    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×<\/button>";
-out += "    <h3 id=\"myModalLabel\">Modal header<\/h3>";
-out += "  <\/div>";
-out += "  <div class=\"modal-body\">";
-out += "    <p>One fine body…<\/p>";
-out += "  <\/div>";
-out += "  <div class=\"modal-footer\">";
-out += "    <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close<\/button>";
-out += "    <button class=\"btn btn-primary\">Save changes<\/button>";
-out += "<\/div>";
-out += "  <\/div>";
+    var out="";
+out += "<div class=\"container\">";
+out += "<!-- Trigger the modal with a button -->";
+out += "<button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Add Tweet<\/button>";
 out += "";
+out += "<!-- Modal -->";
+out += "<div id=\"myModal\" class=\"modal fade\" role=\"dialog\">";
+out += "  <div class=\"modal-dialog\">";
+out += "";
+out += "    <!-- Modal content-->";
+out += "    <div class=\"modal-content\">";
+out += "      <div class=\"modal-header\">";
+out += "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;<\/button>";
+out += "        <h4 class=\"modal-title\">New Tweet<\/h4>";
+out += "      <\/div>";
+out += "      <div class=\"modal-body\">";
+out += "       <textarea rows=\"3\" id=\"tweetContent\"></textarea>";
+out += "      <\/div>";
+out += "      <div class=\"modal-footer\">";
+out += "        <button type=\"button\" onclick=\"addTweet()\" class=\"btn btn-default\" data-dismiss=\"modal\">Add<\/button>";
+out += "      <\/div>";
+out += "    <\/div>";
+out += "";
+out += "  <\/div>";
+out += "<\/div>";
+out += "<\/div>";
 
     var i;
     
@@ -65,6 +73,11 @@ out += "";
 
 }
 
+function addTweet(){
+
+alert("It worked!");
+
+}
 
 
 
