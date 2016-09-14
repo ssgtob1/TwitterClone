@@ -48,7 +48,7 @@ app.post('/login', function(req, res) {
     )
 });
 
-app.post('/addtweet', function(req, res) {
+app.post('/addTweet', function(req, res) {
     var tweet = {
         userid: req.body.userid,
         tweetContent: req.body.tweetContent
@@ -68,6 +68,28 @@ app.post('/addtweet', function(req, res) {
         }
     )
 });
+
+app.post('/likeTweet', function(req, res) {
+    var tweet = {
+        userid: req.body.userid,
+        tweetid: req.body.tweetid
+    };
+    console.log('tweet user id = ' + tweet.userid);
+    console.log('tweet id = ' + tweet.tweetid);
+    
+    var p = db.likeTweet(tweet.tweetid, tweet.userid);
+    p.then(
+        (val) => {
+                res.send(tweet.userid + ' like tweet ' + tweet.tweetid);
+        }
+    ).catch(
+        (err) => {
+            console.log(err);
+            res.send(err);
+        }
+    )
+});
+
 
 app.get('/', function(req, res) {
     res.writeHead(200, {

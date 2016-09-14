@@ -89,7 +89,23 @@ function addTweet(){
                 alert(this.responseText);
             }
         };
-        xhttp.open("POST", "/addtweet", true);
+        xhttp.open("POST", "/addTweet", true);
+        xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhttp.send(params);    
+
+}
+
+function likeTweet(tweetid){
+    alert("In likeTweet " + tweetid);
+    var params = JSON.stringify({ userid: userIdLoggedIn, tweetid: tweetid });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+               // var data = JSON.parse(this.responseText);
+                alert(this.responseText);
+            }
+        };
+        xhttp.open("POST", "/likeTweet", true);
         xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhttp.send(params);    
 
