@@ -59,6 +59,10 @@ out += "<\/div>";
         strVar += feedArr[i].Author;
         strVar += "</h1><br>";
         strVar +=  feedArr[i].Content;
+        strVar += "<br>";
+        strVar += "<a href=\"#\" onclick=\"likeTweet("
+        strVar +=  feedArr[i].Id 
+        strVar += ")\"class=\"btn btn-xs btn-info pull-right\"><span class=\"glyphicon glyphicon-thumbs-up\"><\/span> <\/a>";
         strVar += "<\/div>";
         strVar += "<\/div>";
         strVar += "<br>";
