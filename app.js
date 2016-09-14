@@ -59,7 +59,7 @@ app.post('/addtweet', function(req, res) {
     var p = db.createTweet(tweet.userid, tweet.tweetContent);
     p.then(
         (val) => {
-                return ('Tweet for ' + tweet.userid + ' is added successfully!');
+                res.send('Tweet for ' + tweet.userid + ' is added successfully!');
         }
     ).catch(
         (err) => {

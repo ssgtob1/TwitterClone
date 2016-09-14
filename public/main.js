@@ -81,7 +81,7 @@ function addTweet(){
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                // var data = JSON.parse(this.responseText);
-                alert('Tweet added successfully!');
+                alert(this.responseText);
             }
         };
         xhttp.open("POST", "/addtweet", true);
