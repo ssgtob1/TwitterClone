@@ -121,6 +121,7 @@ function createUser(name, profile) {
 }
 
 
+exports.createTweet = createTweet;
 function createTweet(userId, text) {
     return new Promise(function (resolve, reject) {
         var stmt = db.prepare(`INSERT INTO tweet (Content, Author, Reply) VALUES (?, ?, ?)`);        

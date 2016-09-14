@@ -75,7 +75,18 @@ out += "<\/div>";
 
 function addTweet(){
 
-alert("It worked!");
+    var tweetContent = document.getElementById('tweetContent');
+    var params = JSON.stringify({ userid: userIdLoggedIn, tweetContent: tweetContent.value });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+               // var data = JSON.parse(this.responseText);
+                alert('Tweet added successfully!');
+            }
+        };
+        xhttp.open("POST", "/addtweet", true);
+        xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhttp.send(params);    
 
 }
 

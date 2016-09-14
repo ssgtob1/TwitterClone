@@ -48,6 +48,27 @@ app.post('/login', function(req, res) {
     )
 });
 
+app.post('/addtweet', function(req, res) {
+    var tweet = {
+        userid: req.body.userid,
+        tweetContent: req.body.tweetContent
+    };
+    console.log('tweet user id = ' + tweet.userid);
+    console.log('tweet content = ' + tweet.tweetContent);
+    
+    var p = db.createTweet(tweet.userid, tweet.tweetContent);
+    p.then(
+        (val) => {
+                return ('Tweet for ' + tweet.userid + ' is added successfully!');
+        }
+    ).catch(
+        (err) => {
+            console.log(err);
+            res.send(err);
+        }
+    )
+});
+
 app.get('/', function(req, res) {
     res.writeHead(200, {
         'Content-Type': 'text/html'
